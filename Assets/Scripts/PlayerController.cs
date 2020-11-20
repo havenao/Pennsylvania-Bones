@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public Transform movePoint;
     public LayerMask whatStopsMovement;
+    private ObjectSpawner grids;
 
     
 
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //pull player to move point
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
 
         if(Vector3.Distance(transform.position, movePoint.position) == 0f)
@@ -48,7 +50,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-
             anim.SetBool("moving", true);
         }
     }
@@ -57,6 +58,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Flame"))
         {
+            grids = GetComponent<ObjectSpawner>();
+            grids.objectGrid[collision.gameObject.GetComponent<Flame>().x, collision.gameObject.GetComponent<Flame>().y] = 0;
             Destroy(collision.gameObject);
             anim.Play("Burn", -1, 0f);
            

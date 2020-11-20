@@ -17,7 +17,7 @@ public class ObjectSpawner : MonoBehaviour
     public GameObject flame;
     GameObject flameClone;
 
-    private int[,] objectGrid = new int[11,8];
+    public int[,] objectGrid = new int[11,8];
     private Vector3[,] spawnGrid = new Vector3[11,8];
     private readonly float xOffset = 7.5f;
     private readonly float yOffset = 3.75f;
@@ -91,7 +91,8 @@ public class ObjectSpawner : MonoBehaviour
                     {
                         flameClone = Instantiate(flame, spawnGrid[rX, rY], Quaternion.identity) as GameObject;
                         objectGrid[rX, rY] = 1;
-
+                        flameClone.GetComponent<Flame>().x = rX;
+                        flameClone.GetComponent<Flame>().y = rY;
                         empty = true;
                     }
                 }
