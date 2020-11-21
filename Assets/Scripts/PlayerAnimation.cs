@@ -23,25 +23,21 @@ public class PlayerAnimation : MonoBehaviour
         if (Input.GetAxisRaw("Horizontal") == 1f)
         {
             ChangeSprite(spriteRight);
-            //this.transform.parent.GetComponent<ObjectSpawner>().playerX += 1;
         }
         //Left
         else if (Input.GetAxisRaw("Horizontal") == -1f)
         {
             ChangeSprite(spriteLeft);
-            //this.transform.parent.GetComponent<ObjectSpawner>().playerX -= 1;
         }
         //Down
         else if (Input.GetAxisRaw("Vertical") == -1f)
         {
             ChangeSprite(spriteDown);
-            //this.transform.parent.GetComponent<ObjectSpawner>().playerY -= 1;
         }
         //Right
         else if (Input.GetAxisRaw("Vertical") == 1f)
         {
             ChangeSprite(spriteUp);
-            //this.transform.parent.GetComponent<ObjectSpawner>().playerY += 1;
         }
     }
     void ChangeSprite(Sprite newSprite)

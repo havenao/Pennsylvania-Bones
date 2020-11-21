@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class ObjectSpawner : MonoBehaviour
+public class Level : MonoBehaviour
 {
     public int xGridMax;
     public int yGridMax;
 
-
-    public int playerX = 5;
-    public int playerY = 7;
-
     public bool spawnFlame = false;
 
     public GameObject flame;
-    GameObject flameClone;
+    public GameObject stairs;
+
+    private GameObject prefabClone;
 
     public int[,] objectGrid = new int[11,8];
     private Vector3[,] spawnGrid = new Vector3[11,8];
@@ -38,7 +36,7 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
 
-
+    //Check if Grids are full so you can break loops
     bool IsGridFull()
     {
         int objectCounter = 0;
@@ -52,54 +50,61 @@ public class ObjectSpawner : MonoBehaviour
                 }
             }
         }
+        //BAD CODE ALERT: NEEDS REFACTOR
         if (objectCounter == (xGridMax * yGridMax) - 2) //the -2 accounts for the spots that can't be targeted for spawning
         {
             return true;
         }
         else
             return false;
+    }
 
-        
+    //spawn any object in the grid
+    private void Spawn(GameObject prefab)
+    {
+        bool empty = false;
+        int rX;
+        int rY;
+
+        if (!IsGridFull())
+        {
+            while (!empty)
+            {
+                System.Random r = new System.Random();
+                rX = r.Next(0, xGridMax);
+                rY = r.Next(0, yGridMax);
+
+                if (objectGrid[rX, rY] == 0 && (spawnGrid[rX, rY] - transform.position).magnitude > 1)
+                {
+                    prefabClone = Instantiate(prefab, spawnGrid[rX, rY], Quaternion.identity) as GameObject;
+                    objectGrid[rX, rY] = 1;
+                    prefabClone.GetComponent<Obj>().x = rX;
+                    prefabClone.GetComponent<Obj>().y = rY;
+                    empty = true;
+                }
+            }
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
         MakeGrids();
-        playerX = 5;
-        playerY = 0;
-}
+        Spawn(stairs);
+
+    }
 
     // Update is called once per frame
     void Update()
     {
-        //Spawn a flame whenver any key is pressed (This needs to change to whenever Player moves)
+        //Spawn a flame every step (needs to spawn 1 flame per level every step)
         if(spawnFlame)
         {
-            bool empty = false;
-            int rX;
-            int rY;
-            
-            if(!IsGridFull())
-            {
-                while (!empty)
-                {
-                    System.Random r = new System.Random();
-                    rX = r.Next(0, xGridMax);
-                    rY = r.Next(0, yGridMax);
-
-
-                    if (objectGrid[rX, rY] == 0 && (spawnGrid[rX, rY] - transform.position).magnitude > 1)
-                    {
-                        flameClone = Instantiate(flame, spawnGrid[rX, rY], Quaternion.identity) as GameObject;
-                        objectGrid[rX, rY] = 1;
-                        flameClone.GetComponent<Flame>().x = rX;
-                        flameClone.GetComponent<Flame>().y = rY;
-                        empty = true;
-                    }
-                }
-            }
+            Spawn(flame);
             spawnFlame = false;
         }
+
     }
 }
+
+

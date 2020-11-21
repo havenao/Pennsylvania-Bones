@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public Transform movePoint;
     public LayerMask whatStopsMovement;
-    private ObjectSpawner grids;
+    private Level grids;
 
     
 
@@ -59,11 +59,23 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Flame"))
         {
-            grids = GetComponent<ObjectSpawner>();
+            grids = GetComponent<Level>();
             grids.objectGrid[collision.gameObject.GetComponent<Flame>().x, collision.gameObject.GetComponent<Flame>().y] = 0;
             Destroy(collision.gameObject);
+
             anim.Play("Burn", -1, 0f);
+            this.GetComponent<Status>().health -= 1;
            
         }
+
+        if (collision.gameObject.CompareTag("Stairs"))
+        {
+            grids = GetComponent<Level>();
+            grids.objectGrid[collision.gameObject.GetComponent<Stairs>().x, collision.gameObject.GetComponent<Stairs>().y] = 0;
+            Destroy(collision.gameObject);
+
+            this.GetComponent<Status>().level += 1;
+        }
     }
+
 }
