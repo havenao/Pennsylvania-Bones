@@ -54,27 +54,37 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //Collision will reset grid space to available, destroy object, change player color 
+    //Collision will reset grid space to available, destroy object. 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Flame"))
         {
-            grids = GetComponent<Level>();
+            grids = GameObject.Find("Level(Clone)").GetComponent<Level>();
             grids.objectGrid[collision.gameObject.GetComponent<Flame>().x, collision.gameObject.GetComponent<Flame>().y] = 0;
             Destroy(collision.gameObject);
 
             anim.Play("Burn", -1, 0f);
-            this.GetComponent<Status>().health -= 1;
+            gameObject.GetComponent<Status>().health -= 1;
            
         }
 
         if (collision.gameObject.CompareTag("Stairs"))
         {
-            grids = GetComponent<Level>();
+            grids = GameObject.Find("Level(Clone)").GetComponent<Level>();
             grids.objectGrid[collision.gameObject.GetComponent<Stairs>().x, collision.gameObject.GetComponent<Stairs>().y] = 0;
             Destroy(collision.gameObject);
+            Destroy(GameObject.Find("Level(clone)"));
 
-            this.GetComponent<Status>().level += 1;
+            var flames = GameObject.FindGameObjectsWithTag("Flame");
+
+            for (var i = 0; i < flames.Length; i++)
+            {
+                Destroy(flames[i]);
+            }
+
+            gameObject.GetComponent<Status>().level += 1;
+            Instantiate(GameObject.Find("GameManager").GetComponent<GameManager>().level, new Vector3(-9f, 6f), Quaternion.identity);
+
         }
     }
 
