@@ -10,7 +10,7 @@ public class ObjectSpawner : MonoBehaviour
 
 
     public int playerX = 5;
-    public int playerY = 0;
+    public int playerY = 7;
 
     public bool spawnFlame = false;
 
@@ -19,6 +19,7 @@ public class ObjectSpawner : MonoBehaviour
 
     public int[,] objectGrid = new int[11,8];
     private Vector3[,] spawnGrid = new Vector3[11,8];
+
     private readonly float xOffset = 7.5f;
     private readonly float yOffset = 3.75f;
     
@@ -37,6 +38,7 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
 
+
     bool IsGridFull()
     {
         int objectCounter = 0;
@@ -50,7 +52,7 @@ public class ObjectSpawner : MonoBehaviour
                 }
             }
         }
-        if (objectCounter == (xGridMax * yGridMax))
+        if (objectCounter == (xGridMax * yGridMax) - 2) //the -2 accounts for the spots that can't be targeted for spawning
         {
             return true;
         }
@@ -87,7 +89,7 @@ public class ObjectSpawner : MonoBehaviour
                     rY = r.Next(0, yGridMax);
 
 
-                    if (objectGrid[rX, rY] == 0)
+                    if (objectGrid[rX, rY] == 0 && (spawnGrid[rX, rY] - transform.position).magnitude > 1)
                     {
                         flameClone = Instantiate(flame, spawnGrid[rX, rY], Quaternion.identity) as GameObject;
                         objectGrid[rX, rY] = 1;

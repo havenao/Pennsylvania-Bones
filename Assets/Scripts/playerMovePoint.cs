@@ -5,8 +5,8 @@ using UnityEngine;
 public class playerMovePoint : MonoBehaviour
 {
     private ObjectSpawner myObjectSpawner;
-    private void OnTriggerEnter2D(Collider2D collision)
 
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {

@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         //pull player to move point
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
 
-        if(Vector3.Distance(transform.position, movePoint.position) == 0f)
+        if(Vector3.Distance(transform.position, movePoint.position) <= .05f)
         {
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
             {
@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Collision will reset grid space to available, destroy object, change player color 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Flame"))
