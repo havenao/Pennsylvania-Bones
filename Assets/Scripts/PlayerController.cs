@@ -57,9 +57,10 @@ public class PlayerController : MonoBehaviour
     //Collision will reset grid space to available, destroy object. 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        grids = GameObject.Find("GameManager").GetComponent<Level>();
+
         if (collision.gameObject.CompareTag("Flame"))
         {
-            grids = GameObject.Find("Level(Clone)").GetComponent<Level>();
             grids.objectGrid[collision.gameObject.GetComponent<Flame>().x, collision.gameObject.GetComponent<Flame>().y] = 0;
             Destroy(collision.gameObject);
 
@@ -70,22 +71,19 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Stairs"))
         {
-            grids = GameObject.Find("Level(Clone)").GetComponent<Level>();
             grids.objectGrid[collision.gameObject.GetComponent<Stairs>().x, collision.gameObject.GetComponent<Stairs>().y] = 0;
             Destroy(collision.gameObject);
-            Destroy(GameObject.Find("Level(clone)"));
 
             var flames = GameObject.FindGameObjectsWithTag("Flame");
-
             for (var i = 0; i < flames.Length; i++)
             {
+                grids.objectGrid[flames[i].GetComponent<Flame>().x, flames[i].GetComponent<Flame>().y] = 0;
                 Destroy(flames[i]);
+                
             }
 
             gameObject.GetComponent<Status>().level += 1;
-            Instantiate(GameObject.Find("GameManager").GetComponent<GameManager>().level, new Vector3(-9f, 6f), Quaternion.identity);
-
+            GameObject.Find("GameManager").GetComponent<Level>().nextLevel = true;
         }
     }
-
 }

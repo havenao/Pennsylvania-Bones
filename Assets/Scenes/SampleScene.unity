@@ -430,10 +430,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 792734407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19cf6178131a4488d95ebde175f32736, type: 3}
+  m_Script: {fileID: 11500000, guid: 2628c1abe0d204e6aa9ac895a1790aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: {fileID: 4328711899942831083, guid: 3ec0cac62bf574169876c80024a1c9ee, type: 3}
+  xGridMax: 11
+  yGridMax: 8
+  spawnFlame: 0
+  nextLevel: 0
+  flame: {fileID: 6789838653903676786, guid: 3edd8512ea54441e09242287da336f07, type: 3}
+  stairs: {fileID: 6369052721962278414, guid: 7d95853c773e3460e86481bfd51027e0, type: 3}
 --- !u!4 &792734409
 Transform:
   m_ObjectHideFlags: 0
@@ -441,12 +446,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 792734407}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -6.190235, y: 3.9624, z: -18.023573}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &845573649
 GameObject:
@@ -993,7 +998,7 @@ Transform:
   - {fileID: 1207645913}
   - {fileID: 43362498}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1292891933
 MonoBehaviour:
@@ -1103,7 +1108,7 @@ Transform:
   m_Children:
   - {fileID: 788456509}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1685966003
 GameObject:
@@ -1148,7 +1153,7 @@ Transform:
   - {fileID: 2072522941}
   - {fileID: 845573650}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2072522940
 GameObject:

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(level, new Vector3(-9f, 6f), Quaternion.identity);
+       
     }
 
     // Update is called once per frame

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Flame
   - Stairs
+  - Level
   layers:
   - Default
   - TransparentFX

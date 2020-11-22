@@ -9,6 +9,7 @@ public class Level : MonoBehaviour
     public int yGridMax;
 
     public bool spawnFlame = false;
+    public bool nextLevel = false;
 
     public GameObject flame;
     public GameObject stairs;
@@ -68,13 +69,15 @@ public class Level : MonoBehaviour
 
         if (!IsGridFull())
         {
+
             while (!empty)
             {
+
                 System.Random r = new System.Random();
                 rX = r.Next(0, xGridMax);
                 rY = r.Next(0, yGridMax);
 
-                if (objectGrid[rX, rY] == 0 && (spawnGrid[rX, rY] - transform.position).magnitude > 1)
+                if (objectGrid[rX, rY] == 0 && (spawnGrid[rX, rY] - GameObject.Find("Player").GetComponent<Transform>().transform.position).magnitude > 1)
                 {
                     prefabClone = Instantiate(prefab, spawnGrid[rX, rY], Quaternion.identity) as GameObject;
                     objectGrid[rX, rY] = 1;
@@ -91,7 +94,6 @@ public class Level : MonoBehaviour
     {
         MakeGrids();
         Spawn(stairs);
-
     }
 
     // Update is called once per frame
@@ -100,8 +102,17 @@ public class Level : MonoBehaviour
         //Spawn a flame every step (needs to spawn 1 flame per level every step)
         if(spawnFlame)
         {
-            Spawn(flame);
+            for (int i = 0; i < GameObject.Find("Player").GetComponent<Status>().level; i++)
+            {
+                Spawn(flame);
+            }
             spawnFlame = false;
+        }
+
+        if(nextLevel)
+        {
+            Spawn(stairs);
+            nextLevel = false;
         }
 
     }
