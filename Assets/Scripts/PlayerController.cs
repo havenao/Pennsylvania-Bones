@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public Transform movePoint;
     public LayerMask whatStopsMovement;
-    private Level grids;
+    private Level level;
 
     
 
@@ -57,33 +57,32 @@ public class PlayerController : MonoBehaviour
     //Collision will reset grid space to available, destroy object. 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        grids = GameObject.Find("GameManager").GetComponent<Level>();
+        level = GameObject.Find("GameManager").GetComponent<Level>();
 
         if (collision.gameObject.CompareTag("Flame"))
         {
-            grids.objectGrid[collision.gameObject.GetComponent<Flame>().x, collision.gameObject.GetComponent<Flame>().y] = 0;
+            level.objectGrid[collision.gameObject.GetComponent<Flame>().x, collision.gameObject.GetComponent<Flame>().y] = 0;
             Destroy(collision.gameObject);
 
             anim.Play("Burn", -1, 0f);
             gameObject.GetComponent<Status>().health -= 1;
-           
         }
 
         if (collision.gameObject.CompareTag("Stairs"))
         {
-            grids.objectGrid[collision.gameObject.GetComponent<Stairs>().x, collision.gameObject.GetComponent<Stairs>().y] = 0;
+            level.objectGrid[collision.gameObject.GetComponent<Stairs>().x, collision.gameObject.GetComponent<Stairs>().y] = 0;
             Destroy(collision.gameObject);
 
             var flames = GameObject.FindGameObjectsWithTag("Flame");
             for (var i = 0; i < flames.Length; i++)
             {
-                grids.objectGrid[flames[i].GetComponent<Flame>().x, flames[i].GetComponent<Flame>().y] = 0;
+                level.objectGrid[flames[i].GetComponent<Flame>().x, flames[i].GetComponent<Flame>().y] = 0;
                 Destroy(flames[i]);
-                
             }
 
             gameObject.GetComponent<Status>().level += 1;
             GameObject.Find("GameManager").GetComponent<Level>().nextLevel = true;
+            level.arrow.transform.position -= new Vector3(0f, .5f);
         }
     }
 }

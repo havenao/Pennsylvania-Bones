@@ -13,6 +13,7 @@ public class Level : MonoBehaviour
 
     public GameObject flame;
     public GameObject stairs;
+    public GameObject arrow;
 
     private GameObject prefabClone;
 
