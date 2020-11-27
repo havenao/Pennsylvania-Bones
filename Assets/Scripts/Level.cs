@@ -9,7 +9,6 @@ public class Level : MonoBehaviour
     public int yGridMax;
 
     public bool spawnFlame = false;
-    public bool nextLevel = false;
 
     public GameObject flame;
     public GameObject stairs;
@@ -90,10 +89,18 @@ public class Level : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         MakeGrids();
-        Spawn(stairs);
+        if(GameObject.Find("Player").GetComponent<Status>().level < 10)
+        {
+            Spawn(stairs);
+        }
+        else
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().GroundLevel();
+        }
+        
     }
 
     // Update is called once per frame
@@ -108,13 +115,6 @@ public class Level : MonoBehaviour
             }
             spawnFlame = false;
         }
-
-        if(nextLevel)
-        {
-            Spawn(stairs);
-            nextLevel = false;
-        }
-
     }
 }
 

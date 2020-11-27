@@ -58,9 +58,10 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Level level = GameObject.Find("Level(Clone)").GetComponent<Level>();
-
+        GameObject stairs = GameObject.Find("Stairs(Clone)");
         if (collision.gameObject.CompareTag("Flame"))
         {
+            //Reset flame's grid space to empty
             level.objectGrid[collision.gameObject.GetComponent<Flame>().x, collision.gameObject.GetComponent<Flame>().y] = 0;
             Destroy(collision.gameObject);
 
@@ -72,9 +73,12 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(level.gameObject);
             GameObject.Find("GameManager").GetComponent<GameManager>().NewLevel();
+ 
+        }
 
-            gameObject.GetComponent<Status>().level += 1;
-            GameObject.Find("Level(Clone)").GetComponent<Level>().nextLevel = true;
+        if(collision.gameObject.CompareTag("Exit"))
+        {
+
         }
     }
 }
