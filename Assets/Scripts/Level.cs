@@ -13,7 +13,7 @@ public class Level : MonoBehaviour
 
     public GameObject flame;
     public GameObject stairs;
-    public GameObject arrow;
+
 
     private GameObject prefabClone;
 
@@ -70,10 +70,8 @@ public class Level : MonoBehaviour
 
         if (!IsGridFull())
         {
-
             while (!empty)
             {
-
                 System.Random r = new System.Random();
                 rX = r.Next(0, xGridMax);
                 rY = r.Next(0, yGridMax);
@@ -81,6 +79,7 @@ public class Level : MonoBehaviour
                 if (objectGrid[rX, rY] == 0 && (spawnGrid[rX, rY] - GameObject.Find("Player").GetComponent<Transform>().transform.position).magnitude > 1)
                 {
                     prefabClone = Instantiate(prefab, spawnGrid[rX, rY], Quaternion.identity) as GameObject;
+                    prefabClone.transform.parent = this.transform;
                     objectGrid[rX, rY] = 1;
                     prefabClone.GetComponent<Obj>().x = rX;
                     prefabClone.GetComponent<Obj>().y = rY;

@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 43362500}
-  spriteRight: {fileID: 21300000, guid: ca38f36628bca410db601004f85292c1, type: 3}
+  spriteRight: {fileID: 21300000, guid: 552efde55b7e843d9900342f3fb5aae0, type: 3}
   spriteLeft: {fileID: 21300000, guid: 7e75b860322064a479f57854eaf050c6, type: 3}
   spriteDown: {fileID: 21300000, guid: 9a5c29d64157143b392f5bb7444f90bc, type: 3}
   spriteUp: {fileID: 21300000, guid: cd35a0c99cc3845ad85777270ba0198d, type: 3}
@@ -430,16 +430,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 792734407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2628c1abe0d204e6aa9ac895a1790aae, type: 3}
+  m_Script: {fileID: 11500000, guid: 19cf6178131a4488d95ebde175f32736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xGridMax: 11
-  yGridMax: 8
-  spawnFlame: 0
-  nextLevel: 0
-  flame: {fileID: 6789838653903676786, guid: 3edd8512ea54441e09242287da336f07, type: 3}
-  stairs: {fileID: 6369052721962278414, guid: 7d95853c773e3460e86481bfd51027e0, type: 3}
-  arrow: {fileID: 2044032586}
+  level: {fileID: 3434995951361681954, guid: 1c0bcd93e3dd845c49839cb3e6fac469, type: 3}
 --- !u!4 &792734409
 Transform:
   m_ObjectHideFlags: 0
@@ -975,9 +969,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1292891932}
   - component: {fileID: 1292891933}
+  - component: {fileID: 1292891936}
   - component: {fileID: 1292891935}
   - component: {fileID: 1292891934}
-  - component: {fileID: 1292891936}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
