@@ -7,9 +7,11 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public Transform movePoint;
     public LayerMask whatStopsMovement;
+    public bool atExit = false;
+    public bool gameOver = false;
     //private Level level;
 
-    
+
 
 
     private Animator anim;
@@ -52,13 +54,22 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("moving", true);
         }
+
+        if (atExit)
+        {
+            if (Input.GetAxisRaw("Vertical") == -1f)
+            {
+                gameOver = true;
+                System.Console.WriteLine("You win!");
+            }
+        }
     }
 
     //Collision will reset grid space to available, destroy object. 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Level level = GameObject.Find("Level(Clone)").GetComponent<Level>();
-        GameObject stairs = GameObject.Find("Stairs(Clone)");
+
         if (collision.gameObject.CompareTag("Flame"))
         {
             //Reset flame's grid space to empty
@@ -76,8 +87,19 @@ public class PlayerController : MonoBehaviour
  
         }
 
-        if(collision.gameObject.CompareTag("Exit"))
+        if (collision.gameObject.CompareTag("Exit"))
         {
+            atExit = true;
+            System.Console.WriteLine("At Exit");
+        }
+    }
+
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Exit"))
+        {
+            atExit = false;
 
         }
     }
