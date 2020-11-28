@@ -13,4 +13,10 @@ public class Status : MonoBehaviour
         health--;
         GameObject.Find("UI").GetComponent<UI>().DisplayHealth();
     }
+    public void HealDamage()
+    {
+        health++;
+        GameObject.Find("UI").GetComponent<UI>().DisplayHealth();
+    }
+
 }

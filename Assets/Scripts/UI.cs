@@ -24,7 +24,7 @@ public class UI : MonoBehaviour
     public void DisplayHealth()
     {
         GameObject healthBar = GameObject.Find("Health UI");
-        float heartX = 4.4f;
+        float heartX = 4.3f;
         int health = GameObject.Find("Player").GetComponent<Status>().health;
 
         for (int i = 0; i < healthBar.transform.childCount; i++)

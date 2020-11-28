@@ -46,7 +46,6 @@ MonoBehaviour:
   xGridMax: 11
   yGridMax: 8
   spawnFlame: 0
-  nextLevel: 0
   flame: {fileID: 6789838653903676786, guid: 3edd8512ea54441e09242287da336f07, type: 3}
   stairs: {fileID: 6369052721962278414, guid: 7d95853c773e3460e86481bfd51027e0, type: 3}
-  arrow: {fileID: 1809758237973476373, guid: 86cfbd472d2b744178bbd69ac00da7ac, type: 3}
+  heart: {fileID: 1730342322757803519, guid: 38e45c494601e47fa803ebdaa569ea99, type: 3}

@@ -12,6 +12,7 @@ public class Level : MonoBehaviour
 
     public GameObject flame;
     public GameObject stairs;
+    public GameObject heart;
 
 
     private GameObject prefabClone;
@@ -92,6 +93,7 @@ public class Level : MonoBehaviour
     void Awake()
     {
         MakeGrids();
+        Spawn(heart);
         if(GameObject.Find("Player").GetComponent<Status>().level < 10)
         {
             Spawn(stairs);

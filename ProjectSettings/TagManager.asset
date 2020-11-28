@@ -7,6 +7,8 @@ TagManager:
   - Flame
   - Stairs
   - Level
+  - Exit
+  - Heart
   layers:
   - Default
   - TransparentFX

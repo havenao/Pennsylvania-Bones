@@ -92,6 +92,17 @@ public class PlayerController : MonoBehaviour
  
         }
 
+        if (collision.gameObject.CompareTag("Heart"))
+        {
+            if(gameObject.GetComponent<Status>().health < 5)
+            {
+                gameObject.GetComponent<Status>().HealDamage();
+                Destroy(collision.gameObject);
+            }
+            
+
+        }
+
         if (collision.gameObject.CompareTag("Exit"))
         {
             atExit = true;
