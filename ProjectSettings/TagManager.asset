@@ -9,6 +9,8 @@ TagManager:
   - Level
   - Exit
   - Heart
+  - FireAxe
+  - Artifact
   layers:
   - Default
   - TransparentFX

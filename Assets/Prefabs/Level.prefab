@@ -49,3 +49,6 @@ MonoBehaviour:
   flame: {fileID: 6789838653903676786, guid: 3edd8512ea54441e09242287da336f07, type: 3}
   stairs: {fileID: 6369052721962278414, guid: 7d95853c773e3460e86481bfd51027e0, type: 3}
   heart: {fileID: 1730342322757803519, guid: 38e45c494601e47fa803ebdaa569ea99, type: 3}
+  fireAxe: {fileID: 2595179490156452970, guid: b8fd74de4ff0344f78c9d248a25cad97, type: 3}
+  artifact: {fileID: 8917451289116726363, guid: 7a864d8e59adb43118fa945844cb05e6,
+    type: 3}

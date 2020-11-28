@@ -24,12 +24,10 @@ public class LevelManager : MonoBehaviour
         GameObject newLevel = Instantiate(level) as GameObject;
         newLevel.transform.parent = this.transform;
         GameObject.Find("arrow(Clone)").GetComponent<Transform>().transform.position -= new Vector3(0f, .5f);
-        
     }
 
     public void GroundLevel()
     {
-        
         groundLevel = Instantiate(groundLevel) as GameObject;
         groundLevel.transform.SetParent(GameObject.Find("Grid").transform);
     }

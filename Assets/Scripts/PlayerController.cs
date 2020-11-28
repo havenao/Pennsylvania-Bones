@@ -89,7 +89,17 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(level.gameObject);
             GameObject.Find("LevelManager").GetComponent<LevelManager>().NewLevel();
- 
+        }
+
+        if (collision.gameObject.CompareTag("FireAxe"))
+        {
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Artifact"))
+        {
+            Destroy(collision.gameObject);
+            gameObject.GetComponent<Status>().GetArtifact();
         }
 
         if (collision.gameObject.CompareTag("Heart"))
@@ -99,9 +109,8 @@ public class PlayerController : MonoBehaviour
                 gameObject.GetComponent<Status>().HealDamage();
                 Destroy(collision.gameObject);
             }
-            
-
         }
+
 
         if (collision.gameObject.CompareTag("Exit"))
         {
@@ -116,7 +125,6 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Exit"))
         {
             atExit = false;
-
         }
     }
 }

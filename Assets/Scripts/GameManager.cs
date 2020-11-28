@@ -1,11 +1,14 @@
 ﻿
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     bool gameHasEnded = false;
     public bool playerWon = false;
+
+
 
     public void EndGame()
     {
@@ -23,10 +26,7 @@ public class GameManager : MonoBehaviour
                 gameHasEnded = true;
             }
         }
-    }   
-
-
-
+    }
 
     void Restart()
     {

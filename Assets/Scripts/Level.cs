@@ -13,6 +13,8 @@ public class Level : MonoBehaviour
     public GameObject flame;
     public GameObject stairs;
     public GameObject heart;
+    public GameObject fireAxe;
+    public GameObject artifact;
 
 
     private GameObject prefabClone;
@@ -92,9 +94,12 @@ public class Level : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        int lvl = GameObject.Find("Player").GetComponent<Status>().level;
         MakeGrids();
         Spawn(heart);
-        if(GameObject.Find("Player").GetComponent<Status>().level < 10)
+        //Spawn(GetItem());
+
+        if (lvl < 10)
         {
             Spawn(stairs);
         }
@@ -102,7 +107,12 @@ public class Level : MonoBehaviour
         {
             GameObject.Find("LevelManager").GetComponent<LevelManager>().GroundLevel();
         }
+
         
+        for (int i = 0; i < lvl; i++)
+        {
+            Spawn(artifact);
+        }
     }
 
     // Update is called once per frame
@@ -118,6 +128,19 @@ public class Level : MonoBehaviour
             spawnFlame = false;
         }
     }
+
+    //GameObject GetItem()
+    //{
+    //    var Items = new List<GameObject>()
+    //    {
+    //        fireAxe,
+    //        heart
+    //    };
+
+    //    System.Random rItem = new System.Random();
+    //    GameObject thisItem = Items[rItem.Next(Items.Count)];
+    //    return thisItem;
+    //}
 }
 
 
