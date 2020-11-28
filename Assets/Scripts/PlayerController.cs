@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     public Transform movePoint;
     public LayerMask whatStopsMovement;
     public bool atExit = false;
-    public bool gameOver = false;
     //private Level level;
 
 
@@ -59,9 +58,15 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetAxisRaw("Vertical") == -1f)
             {
-                gameOver = true;
-                System.Console.WriteLine("You win!");
+                FindObjectOfType<GameManager>().playerWon = true;
+                FindObjectOfType<GameManager>().EndGame();
             }
+        }
+
+        if(gameObject.GetComponent<Status>().health <= 0)
+        {
+            FindObjectOfType<GameManager>().playerWon = false;
+            FindObjectOfType<GameManager>().EndGame();
         }
     }
 
@@ -83,7 +88,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Stairs"))
         {
             Destroy(level.gameObject);
-            GameObject.Find("GameManager").GetComponent<GameManager>().NewLevel();
+            GameObject.Find("LevelManager").GetComponent<LevelManager>().NewLevel();
  
         }
 

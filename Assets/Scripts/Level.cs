@@ -98,7 +98,7 @@ public class Level : MonoBehaviour
         }
         else
         {
-            GameObject.Find("GameManager").GetComponent<GameManager>().GroundLevel();
+            GameObject.Find("LevelManager").GetComponent<LevelManager>().GroundLevel();
         }
         
     }

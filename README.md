@@ -8,17 +8,14 @@ Good luck Mr. Bones.
 -----------------------------------------------------------------
 
 To Do:
--Refactoring:
-    -Restructure Classes and Scripts
-        -Make Level object that all spawns are children of that Level object
-            -On new level, delete level object, spawn new level object that runs make grids.
-            -Make final Level object to spawn door instead of stairs.
 
 -MVP:
-    -Add Escape Door on Ground Floor.
+    xAdd Escape Door on Ground Floor.
     -Add UI elements
     -Menu, Death, Victory Screens
     
+-Simple Features:
+    -Spice up Menu
 
 -Features:
     -Add Items, Artifacts, Health
