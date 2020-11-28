@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     {
         if (!gameHasEnded)
         {
+            GameObject.Find("SceneState").GetComponent<SceneState>().UpdateState();
             if (!playerWon)
             {
                 SceneManager.LoadScene("Lose");

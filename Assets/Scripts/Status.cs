@@ -28,9 +28,4 @@ public class Status : MonoBehaviour
         artifactCount = artifactCount.GetComponent<TextMeshProUGUI>();
         artifactCount.SetText(artifacts.ToString());
     }
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
 }

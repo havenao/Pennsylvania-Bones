@@ -12,7 +12,7 @@ public class Victory : MonoBehaviour
     }
     public void winScreen()
     {
-        string arts = GameObject.Find("Player").GetComponent<Status>().artifacts.ToString();
+        string arts = GameObject.Find("SceneState").GetComponent<SceneState>().artifacts.ToString();
         artCount.SetText($"well done mr. bones, you rescued {arts} artifacts!");
     }
 }
