@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
 
             anim.Play("Burn", -1, 0f);
-            gameObject.GetComponent<Status>().health -= 1;
+            gameObject.GetComponent<Status>().TakeDamage();
         }
 
         if (collision.gameObject.CompareTag("Stairs"))
