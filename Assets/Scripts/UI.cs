@@ -21,6 +21,7 @@ public class UI : MonoBehaviour
     {
         float heartX = 4.3f;
         int health = Player.Instance.health;
+        
 
         for (int i = 0; i < HealthContainer.transform.childCount; i++)
         {

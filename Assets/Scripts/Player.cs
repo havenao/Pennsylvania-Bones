@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     public static Player Instance;
     public int health = 3;
 
-    private int score = 0;
     private int artifacts = 0;
     public int Artifacts => artifacts;
 
