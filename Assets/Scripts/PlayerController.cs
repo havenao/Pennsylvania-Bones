@@ -8,13 +8,9 @@ public class PlayerController : MonoBehaviour
     public Transform movePoint;
     public LayerMask whatStopsMovement;
     public bool atExit = false;
-    //private Level level;
-
-
-
 
     private Animator anim;
-    // Start is called before the first frame update
+
     void Start()
     {
         movePoint.parent = null;
@@ -58,15 +54,15 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetAxisRaw("Vertical") == -1f)
             {
-                FindObjectOfType<GameManager>().playerWon = true;
-                FindObjectOfType<GameManager>().EndGame();
+                GameManager.Instance.playerWon = true;
+                GameManager.Instance.EndGame();
             }
         }
 
-        if(gameObject.GetComponent<Status>().health <= 0)
+        if(gameObject.GetComponent<Player>().health <= 0)
         {
-            FindObjectOfType<GameManager>().playerWon = false;
-            FindObjectOfType<GameManager>().EndGame();
+            GameManager.Instance.playerWon = false;
+            GameManager.Instance.EndGame();
         }
     }
 
@@ -82,13 +78,13 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
 
             anim.Play("Burn", -1, 0f);
-            gameObject.GetComponent<Status>().TakeDamage();
+            gameObject.GetComponent<Player>().TakeDamage();
         }
 
         if (collision.gameObject.CompareTag("Stairs"))
         {
             Destroy(level.gameObject);
-            GameObject.Find("LevelManager").GetComponent<LevelManager>().NewLevel();
+            LevelManager.Instance.NewLevel(false);
         }
 
         if (collision.gameObject.CompareTag("FireAxe"))
@@ -99,14 +95,14 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Artifact"))
         {
             Destroy(collision.gameObject);
-            gameObject.GetComponent<Status>().GetArtifact();
+            gameObject.GetComponent<Player>().GetArtifact();
         }
 
         if (collision.gameObject.CompareTag("Heart"))
         {
-            if(gameObject.GetComponent<Status>().health < 5)
+            if(gameObject.GetComponent<Player>().health < 5)
             {
-                gameObject.GetComponent<Status>().HealDamage();
+                gameObject.GetComponent<Player>().HealDamage();
                 Destroy(collision.gameObject);
             }
         }

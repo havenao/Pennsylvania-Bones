@@ -9,16 +9,16 @@ Good luck Mr. Bones.
 
 To Do:
 
--MVP:
+xMVP:
     xAdd Escape Door on Ground Floor.
-    -Add UI elements
-    -Menu, Death, Victory Screens
+    xAdd UI elements
+    xMenu, Death, Victory Screens
     
 -Simple Features:
-    -Spice up Menu
+    xSpice up Menu
 
 -Features:
-    -Add Items, Artifacts, Health
+    -Add Items, xArtifacts, xHealth
     -Item UI
     -Add Scoring
     -Choose Difficutly Option

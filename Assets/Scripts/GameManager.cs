@@ -5,16 +5,28 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
     bool gameHasEnded = false;
     public bool playerWon = false;
+    public SceneState SceneState;
 
-
+    private void Awake()
+    {
+        if(Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     public void EndGame()
     {
         if (!gameHasEnded)
         {
-            GameObject.Find("SceneState").GetComponent<SceneState>().UpdateState();
+            SceneState.UpdateState();
             if (!playerWon)
             {
                 SceneManager.LoadScene("Lose");

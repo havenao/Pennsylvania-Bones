@@ -11,20 +11,8 @@ public class SceneState : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void UpdateState()
     {
-        artifacts = GameObject.Find("Player").GetComponent<Status>().artifacts;
+        artifacts = Player.Instance.Artifacts;
     }
 }

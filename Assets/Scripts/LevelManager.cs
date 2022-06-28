@@ -1,34 +1,53 @@
-﻿using System.Collections;
+﻿
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public GameObject level;
+    public static LevelManager Instance;
+    public Level levelPrefab;
     public GameObject groundLevel;
-    // Start is called before the first frame update
+
+    public int Floor = 10;
+    private Level _currentLevel;
+    public Level CurrentLevel => _currentLevel;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     void Start()
     {
-        NewLevel();
+        NewLevel(true);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    public void NewLevel()
+    public Action OnLevelChanged;
+
+    public void NewLevel(bool firstLevel)
     {
-        GameObject.Find("Player").GetComponent<Status>().level += 1;
-        GameObject newLevel = Instantiate(level) as GameObject;
-        newLevel.transform.parent = this.transform;
-        GameObject.Find("arrow(Clone)").GetComponent<Transform>().transform.position -= new Vector3(0f, .5f);
+        if (!firstLevel)
+        {
+            Floor -= 1;
+        }
+        _currentLevel = Instantiate(levelPrefab);
+        _currentLevel.transform.parent = this.transform;
+        OnLevelChanged?.Invoke();
     }
 
     public void GroundLevel()
     {
-        groundLevel = Instantiate(groundLevel) as GameObject;
+        groundLevel = Instantiate(groundLevel);
         groundLevel.transform.SetParent(GameObject.Find("Grid").transform);
     }
 }

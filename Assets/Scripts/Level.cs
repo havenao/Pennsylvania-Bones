@@ -15,6 +15,8 @@ public class Level : MonoBehaviour
     public GameObject heart;
     public GameObject fireAxe;
     public GameObject artifact;
+    public GameObject coffee;
+    public GameObject extinguisher;
 
 
     private GameObject prefabClone;
@@ -78,7 +80,7 @@ public class Level : MonoBehaviour
                 rX = r.Next(0, xGridMax);
                 rY = r.Next(0, yGridMax);
 
-                if (objectGrid[rX, rY] == 0 && (spawnGrid[rX, rY] - GameObject.Find("Player").GetComponent<Transform>().transform.position).magnitude > 1)
+                if (objectGrid[rX, rY] == 0 && (spawnGrid[rX, rY] - Player.Instance.transform.position).magnitude > 1)
                 {
                     prefabClone = Instantiate(prefab, spawnGrid[rX, rY], Quaternion.identity) as GameObject;
                     prefabClone.transform.parent = this.transform;
@@ -94,25 +96,27 @@ public class Level : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        int lvl = GameObject.Find("Player").GetComponent<Status>().level;
+        int floor = LevelManager.Instance.Floor;
         MakeGrids();
         Spawn(heart);
-        //Spawn(GetItem());
+        
 
-        if (lvl < 10)
+        if (floor > 1)
         {
             Spawn(stairs);
         }
         else
         {
-            GameObject.Find("LevelManager").GetComponent<LevelManager>().GroundLevel();
+            LevelManager.Instance.GroundLevel();
         }
 
         
-        for (int i = 0; i < lvl; i++)
+        for (int i = 0; i < 11 - floor; i++)
         {
             Spawn(artifact);
         }
+
+        Spawn(GetItem());
     }
 
     // Update is called once per frame
@@ -121,7 +125,7 @@ public class Level : MonoBehaviour
         //Spawn a flame every step (needs to spawn 1 flame per level every step)
         if(spawnFlame)
         {
-            for (int i = 0; i < GameObject.Find("Player").GetComponent<Status>().level; i++)
+            for (int i = 11; i > LevelManager.Instance.Floor; i--)
             {
                 Spawn(flame);
             }
@@ -129,18 +133,17 @@ public class Level : MonoBehaviour
         }
     }
 
-    //GameObject GetItem()
-    //{
-    //    var Items = new List<GameObject>()
-    //    {
-    //        fireAxe,
-    //        heart
-    //    };
+    GameObject GetItem()
+    {
+        var Items = new List<GameObject>()
+        {
+            fireAxe
+        };
 
-    //    System.Random rItem = new System.Random();
-    //    GameObject thisItem = Items[rItem.Next(Items.Count)];
-    //    return thisItem;
-    //}
+        System.Random rItem = new System.Random();
+        GameObject thisItem = Items[rItem.Next(Items.Count)];
+        return thisItem;
+    }
 }
 
 
