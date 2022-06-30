@@ -33,22 +33,9 @@ public class GridManager : MonoBehaviour
         }
     }
 
-
     public void RemoveObject(GridObject gridObject)
     {
-        GridSpace space;
-        for (int y = 0; y < yGridMax; y++)
-        {
-            for (int x = 0; x < xGridMax; x++)
-            {
-                space = grid[x, y]; 
-                if(space.CurrentObject == gridObject)
-                {
-                    ClearGridSpace(space);
-                    return;
-                }
-            }
-        }
+        ClearGridSpace(gridObject.Space);
     }
 
     private void ClearGridSpace(GridSpace gridSpace)

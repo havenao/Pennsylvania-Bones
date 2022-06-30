@@ -20,10 +20,12 @@ public class GridSpace
     public void AddObject(GridObject obj)
     {
         _currentObject = obj;
+        _currentObject.SetSpace(this);
     }
 
     public void ClearObject()
     {
-        _currentObject = null;
+        _currentObject.SetSpace(null);
+        _currentObject = null;        
     }
 }
