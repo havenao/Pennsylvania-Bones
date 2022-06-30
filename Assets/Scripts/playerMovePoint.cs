@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerMovePoint : MonoBehaviour
+public class PlayerMovePoint : MonoBehaviour
 {
-    private Level flameSpawner;
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        Level level = LevelManager.Instance.CurrentLevel;
+
+        if (level.spawnFlame && collision.gameObject.CompareTag("Player"))
         {
-            flameSpawner = GameObject.Find("Level(Clone)").GetComponent<Level>();
-            flameSpawner.spawnFlame = true;
+            LevelManager.Instance.CurrentLevel.SpawnFlame();
         }
+  
     }
 }

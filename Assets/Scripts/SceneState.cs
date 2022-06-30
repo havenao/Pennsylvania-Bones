@@ -8,6 +8,7 @@ public class SceneState : MonoBehaviour
 
     private void Awake()
     {
+
         DontDestroyOnLoad(gameObject);
     }
 

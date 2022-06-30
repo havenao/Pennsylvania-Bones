@@ -12,8 +12,6 @@ public class Player : MonoBehaviour
     private int artifacts = 0;
     public int Artifacts => artifacts;
 
-    public TextMeshProUGUI artifactCount;
-
     public Action OnHealthChanged;
     public Action<int> OnArtifactGained;
 

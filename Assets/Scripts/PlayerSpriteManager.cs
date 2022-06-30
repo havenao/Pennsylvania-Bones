@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimation : MonoBehaviour
+public class PlayerSpriteManager : MonoBehaviour
 {
-    public SpriteRenderer sr;
-    public Sprite spriteRight;
-    public Sprite spriteLeft;
-    public Sprite spriteDown;
-    public Sprite spriteUp;
+    SpriteRenderer sr;
+    [SerializeField] Sprite spriteRight;
+    [SerializeField] Sprite spriteLeft;
+    [SerializeField] Sprite spriteDown;
+    [SerializeField] Sprite spriteUp;
 
     // Start is called before the first frame update
     void Start()
     {
-        sr = gameObject.GetComponent<SpriteRenderer>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -40,6 +40,7 @@ public class PlayerAnimation : MonoBehaviour
             ChangeSprite(spriteUp);
         }
     }
+
     void ChangeSprite(Sprite newSprite)
     {
         sr.sprite = newSprite;

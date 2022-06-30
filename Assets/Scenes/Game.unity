@@ -131,8 +131,8 @@ GameObject:
   m_Component:
   - component: {fileID: 43362498}
   - component: {fileID: 43362500}
-  - component: {fileID: 43362499}
   - component: {fileID: 43362501}
+  - component: {fileID: 43362499}
   m_Layer: 10
   m_Name: Player Sprite
   m_TagString: Untagged
@@ -163,10 +163,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 43362497}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80c702718bab14d998092d67ad96c781, type: 3}
+  m_Script: {fileID: 11500000, guid: ed932a309af6b47308a467f8b5cada60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sr: {fileID: 43362500}
   spriteRight: {fileID: 21300000, guid: 552efde55b7e843d9900342f3fb5aae0, type: 3}
   spriteLeft: {fileID: 21300000, guid: 7e75b860322064a479f57854eaf050c6, type: 3}
   spriteDown: {fileID: 21300000, guid: 9a5c29d64157143b392f5bb7444f90bc, type: 3}
@@ -733,7 +732,6 @@ MonoBehaviour:
   heart: {fileID: 1730342322757803519, guid: 38e45c494601e47fa803ebdaa569ea99, type: 3}
   HealthContainer: {fileID: 440283930}
   TowerImage: {fileID: 788456509}
-  LevelManager: {fileID: 792734408}
   _artifactCounter: {fileID: 184231548}
 --- !u!1 &788456507
 GameObject:
@@ -1464,10 +1462,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1292891932}
+  - component: {fileID: 1292891936}
   - component: {fileID: 1292891933}
   - component: {fileID: 1292891935}
   - component: {fileID: 1292891934}
-  - component: {fileID: 1292891936}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -1569,7 +1567,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
-  artifactCount: {fileID: 184231548}
 --- !u!1001 &1375789779
 PrefabInstance:
   m_ObjectHideFlags: 0

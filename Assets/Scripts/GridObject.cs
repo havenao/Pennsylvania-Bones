@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obj : MonoBehaviour
+public class GridObject : MonoBehaviour
 {
-    public int x;
-    public int y;
     
 }

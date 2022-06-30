@@ -20,10 +20,84 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Movement();
+
+        if (atExit)
+        {
+            if (Input.GetAxisRaw("Vertical") == -1f)
+            {
+
+                GameManager.Instance.playerWon = true;
+                GameManager.Instance.EndGame();
+            }
+        }
+
+        if(Player.Instance.health <= 0)
+        {
+            GameManager.Instance.playerWon = false;
+            GameManager.Instance.EndGame();
+        }
+    }
+
+    //Collision will reset grid space to available, destroy object. 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Flame"))
+        {
+            ResetGridSpace(collision);
+
+            anim.Play("Burn", -1, 0f);
+            Player.Instance.TakeDamage();
+        }
+
+        if (collision.gameObject.CompareTag("Stairs"))
+        {
+            Destroy(LevelManager.Instance.CurrentLevel.gameObject);
+            LevelManager.Instance.NewLevel(false);
+        }
+
+        if (collision.gameObject.CompareTag("FireAxe"))
+        {
+            ResetGridSpace(collision);
+        }
+
+        if (collision.gameObject.CompareTag("Artifact"))
+        {
+            Player.Instance.GetArtifact();
+            ResetGridSpace(collision);            
+        }
+
+        if (collision.gameObject.CompareTag("Heart"))
+        {
+            if(Player.Instance.health < 5)
+            {
+                Player.Instance.HealDamage();
+                ResetGridSpace(collision);
+            }
+        }
+
+        if (collision.gameObject.CompareTag("Exit"))
+        {
+            atExit = true;
+            System.Console.WriteLine("At Exit");
+        }
+    }
+
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Exit"))
+        {
+            atExit = false;
+        }
+    }
+
+    private void Movement()
+    {
         //pull player to move point
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
 
-        if(Vector3.Distance(transform.position, movePoint.position) <= .05f)
+        if (Vector3.Distance(transform.position, movePoint.position) <= .05f)
         {
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
             {
@@ -49,78 +123,13 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("moving", true);
         }
-
-        if (atExit)
-        {
-            if (Input.GetAxisRaw("Vertical") == -1f)
-            {
-                GameManager.Instance.playerWon = true;
-                GameManager.Instance.EndGame();
-            }
-        }
-
-        if(gameObject.GetComponent<Player>().health <= 0)
-        {
-            GameManager.Instance.playerWon = false;
-            GameManager.Instance.EndGame();
-        }
     }
 
-    //Collision will reset grid space to available, destroy object. 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void ResetGridSpace(Collision2D collision)
     {
-        Level level = GameObject.Find("Level(Clone)").GetComponent<Level>();
+        GridObject objectToRemove = collision.gameObject.GetComponent<GridObject>();
+        LevelManager.Instance.CurrentLevel.Grid.RemoveObject(objectToRemove);
 
-        if (collision.gameObject.CompareTag("Flame"))
-        {
-            //Reset flame's grid space to empty
-            level.objectGrid[collision.gameObject.GetComponent<Flame>().x, collision.gameObject.GetComponent<Flame>().y] = 0;
-            Destroy(collision.gameObject);
-
-            anim.Play("Burn", -1, 0f);
-            gameObject.GetComponent<Player>().TakeDamage();
-        }
-
-        if (collision.gameObject.CompareTag("Stairs"))
-        {
-            Destroy(level.gameObject);
-            LevelManager.Instance.NewLevel(false);
-        }
-
-        if (collision.gameObject.CompareTag("FireAxe"))
-        {
-            Destroy(collision.gameObject);
-        }
-
-        if (collision.gameObject.CompareTag("Artifact"))
-        {
-            Destroy(collision.gameObject);
-            gameObject.GetComponent<Player>().GetArtifact();
-        }
-
-        if (collision.gameObject.CompareTag("Heart"))
-        {
-            if(gameObject.GetComponent<Player>().health < 5)
-            {
-                gameObject.GetComponent<Player>().HealDamage();
-                Destroy(collision.gameObject);
-            }
-        }
-
-
-        if (collision.gameObject.CompareTag("Exit"))
-        {
-            atExit = true;
-            System.Console.WriteLine("At Exit");
-        }
-    }
-
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Exit"))
-        {
-            atExit = false;
-        }
+        Destroy(collision.gameObject);
     }
 }

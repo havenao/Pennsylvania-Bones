@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3434995951361681965}
   - component: {fileID: 3434995951361681964}
+  - component: {fileID: -3206846511746998313}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -43,12 +44,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2628c1abe0d204e6aa9ac895a1790aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xGridMax: 11
-  yGridMax: 8
   spawnFlame: 0
-  flame: {fileID: 6789838653903676786, guid: 3edd8512ea54441e09242287da336f07, type: 3}
-  stairs: {fileID: 6369052721962278414, guid: 7d95853c773e3460e86481bfd51027e0, type: 3}
-  heart: {fileID: 1730342322757803519, guid: 38e45c494601e47fa803ebdaa569ea99, type: 3}
-  fireAxe: {fileID: 2595179490156452970, guid: b8fd74de4ff0344f78c9d248a25cad97, type: 3}
-  artifact: {fileID: 8917451289116726363, guid: 7a864d8e59adb43118fa945844cb05e6,
+  flame: {fileID: -684539692948371372, guid: 3edd8512ea54441e09242287da336f07, type: 3}
+  stairs: {fileID: 627409310825046436, guid: 7d95853c773e3460e86481bfd51027e0, type: 3}
+  heart: {fileID: 4061539889827513548, guid: 38e45c494601e47fa803ebdaa569ea99, type: 3}
+  fireAxe: {fileID: -8869587968807958462, guid: b8fd74de4ff0344f78c9d248a25cad97,
     type: 3}
+  artifact: {fileID: 6818810102400747145, guid: 7a864d8e59adb43118fa945844cb05e6,
+    type: 3}
+  coffee: {fileID: 0}
+  extinguisher: {fileID: 0}
+--- !u!114 &-3206846511746998313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3434995951361681954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f4dc2da6c5741da840dbcf3e97313d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

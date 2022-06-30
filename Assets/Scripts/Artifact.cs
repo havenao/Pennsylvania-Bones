@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Artifact : Obj
+public class Artifact : GridObject
 {
 
 }

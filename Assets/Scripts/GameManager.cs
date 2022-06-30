@@ -29,12 +29,14 @@ public class GameManager : MonoBehaviour
             SceneState.UpdateState();
             if (!playerWon)
             {
+                SceneState.UpdateState();
                 SceneManager.LoadScene("Lose");
                 gameHasEnded = true;
                 
             }
             else if (playerWon)
             {
+                SceneState.UpdateState();
                 SceneManager.LoadScene("Victory");
                 gameHasEnded = true;
             }

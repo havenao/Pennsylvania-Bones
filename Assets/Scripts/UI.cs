@@ -8,7 +8,6 @@ public class UI : MonoBehaviour
     public GameObject arrow;
     public GameObject heart;
     public Transform HealthContainer, TowerImage;
-    public LevelManager LevelManager;
     [SerializeField] TextMeshProUGUI _artifactCounter;
 
     void Start()
@@ -57,13 +56,13 @@ public class UI : MonoBehaviour
     {
         Player.Instance.OnHealthChanged += DisplayHealth;
         Player.Instance.OnArtifactGained += UpdateArtifactCount;
-        LevelManager.OnLevelChanged += MoveArrow;
+        LevelManager.Instance.OnLevelChanged += MoveArrow;
     }
 
     private void OnDisable()
     {
         Player.Instance.OnHealthChanged -= DisplayHealth;
         Player.Instance.OnArtifactGained -= UpdateArtifactCount;
-        LevelManager.OnLevelChanged -= MoveArrow;
+        LevelManager.Instance.OnLevelChanged -= MoveArrow;
     }
 }

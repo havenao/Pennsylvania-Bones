@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Heart : Obj
+public class Heart : GridObject
 {
     void Start()
     {

@@ -5,101 +5,29 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    public int xGridMax;
-    public int yGridMax;
-
     public bool spawnFlame = false;
 
-    public GameObject flame;
-    public GameObject stairs;
-    public GameObject heart;
-    public GameObject fireAxe;
-    public GameObject artifact;
-    public GameObject coffee;
-    public GameObject extinguisher;
+    [SerializeField] GridObject flame;
+    [SerializeField] GridObject stairs;
+    [SerializeField] GridObject heart;
+    [SerializeField] GridObject fireAxe;
+    [SerializeField] GridObject artifact;
+    [SerializeField] GridObject coffee;
+    [SerializeField] GridObject extinguisher;
 
-
-    private GameObject prefabClone;
-
-    public int[,] objectGrid = new int[11,8];
-    private Vector3[,] spawnGrid = new Vector3[11,8];
-
-    private readonly float xOffset = 7.5f;
-    private readonly float yOffset = 3.75f;
+    private GridManager grid;
+    public GridManager Grid => grid;
     
-  
-    
-    //Generate a 2D array of Locations
-    void MakeGrids()
-    {
-        for (int y = 0; y < yGridMax; y++)
-        {
-            for (int x = 0; x < xGridMax; x++)
-            {
-                objectGrid[x, y] = 0;
-                spawnGrid[x, y] = new Vector3(x - xOffset, y - yOffset, 0);
-            }
-        }
-    }
-
-    //Check if Grids are full so you can break loops
-    bool IsGridFull()
-    {
-        int objectCounter = 0;
-        for (int y = 0; y < yGridMax; y++)
-        {
-            for (int x = 0; x < xGridMax; x++)
-            {
-                if(objectGrid[x, y] == 1)
-                {
-                    objectCounter++;
-                }
-            }
-        }
-        //BAD CODE ALERT: NEEDS REFACTOR
-        if (objectCounter == (xGridMax * yGridMax) - 2) //the -2 accounts for the spots that can't be targeted for spawning
-        {
-            return true;
-        }
-        else
-            return false;
-    }
-
-    //spawn any object in the grid
-    private void Spawn(GameObject prefab)
-    {
-        bool empty = false;
-        int rX;
-        int rY;
-
-        if (!IsGridFull())
-        {
-            while (!empty)
-            {
-                System.Random r = new System.Random();
-                rX = r.Next(0, xGridMax);
-                rY = r.Next(0, yGridMax);
-
-                if (objectGrid[rX, rY] == 0 && (spawnGrid[rX, rY] - Player.Instance.transform.position).magnitude > 1)
-                {
-                    prefabClone = Instantiate(prefab, spawnGrid[rX, rY], Quaternion.identity) as GameObject;
-                    prefabClone.transform.parent = this.transform;
-                    objectGrid[rX, rY] = 1;
-                    prefabClone.GetComponent<Obj>().x = rX;
-                    prefabClone.GetComponent<Obj>().y = rY;
-                    empty = true;
-                }
-            }
-        }
-    }
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         int floor = LevelManager.Instance.Floor;
-        MakeGrids();
+        grid = GetComponent<GridManager>();
+
+        grid.MakeGrid();
+
         Spawn(heart);
-        
 
         if (floor > 1)
         {
@@ -110,40 +38,51 @@ public class Level : MonoBehaviour
             LevelManager.Instance.GroundLevel();
         }
 
-        
         for (int i = 0; i < 11 - floor; i++)
         {
             Spawn(artifact);
         }
 
         Spawn(GetItem());
+        spawnFlame = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SpawnFlame()
     {
-        //Spawn a flame every step (needs to spawn 1 flame per level every step)
-        if(spawnFlame)
+        for (int i = 11; i > LevelManager.Instance.Floor; i--)
         {
-            for (int i = 11; i > LevelManager.Instance.Floor; i--)
-            {
-                Spawn(flame);
-            }
-            spawnFlame = false;
+            Spawn(flame);
         }
     }
 
-    GameObject GetItem()
+    // Spawn any object in the grid
+    private void Spawn(GridObject prefab)
     {
-        var Items = new List<GameObject>()
+        GridSpace space = grid.GetAvailableSpace();
+
+        if (space == null) return;
+
+        GridObject prefabClone = Instantiate(prefab, space.Position, Quaternion.identity);
+        prefabClone.transform.parent = this.transform;
+
+        grid.AddObjectToGridSpace(space, prefabClone);  
+    }
+
+
+
+    GridObject GetItem()
+    {
+        var Items = new List<GridObject>()
         {
             fireAxe
         };
 
-        System.Random rItem = new System.Random();
-        GameObject thisItem = Items[rItem.Next(Items.Count)];
+
+        GridObject thisItem = Items[Random.Range(0, Items.Count)];
         return thisItem;
     }
+
+
 }
 
 
