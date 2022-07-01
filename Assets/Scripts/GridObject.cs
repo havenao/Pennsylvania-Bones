@@ -23,10 +23,9 @@ public abstract class GridObject : MonoBehaviour
 
     protected abstract void PlayerPickup();
 
-    protected void ResetGridSpace()
+    protected void ClearGridObject()
     {
         LevelManager.Instance.CurrentLevel.Grid.RemoveObject(this);
-
         Destroy(this.gameObject);
     }
 }

@@ -13,12 +13,13 @@ public class Player : MonoBehaviour
     private Animator _anim;
     public Animator Anim => _anim;
 
-    public int health = 3;
+    [SerializeField] int _health = 3;
+    public int Health => _health;
 
     private int artifacts = 0;
     public int Artifacts => artifacts;
 
-    public Action OnHealthChanged;
+    public Action<int> OnHealthChanged;
     public Action<int> OnArtifactGained;
 
     private void Awake()
@@ -37,13 +38,13 @@ public class Player : MonoBehaviour
     }
     public void TakeDamage()
     {
-        health--;
-        OnHealthChanged?.Invoke();
+        _health--;
+        OnHealthChanged?.Invoke(_health);
     }
     public void HealDamage()
     {
-        health++;
-        OnHealthChanged?.Invoke();
+        _health++;
+        OnHealthChanged?.Invoke(_health);
     }
 
     public void GetArtifact()

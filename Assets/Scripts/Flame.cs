@@ -6,7 +6,7 @@ public class Flame : GridObject
 {
     protected override void PlayerPickup()
     {
-        ResetGridSpace();
+        ClearGridObject();
         Player.Instance.Anim.Play("Burn", -1, 0f);
         Player.Instance.TakeDamage();
     }

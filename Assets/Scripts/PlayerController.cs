@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(Player.Instance.health <= 0)
+        if(Player.Instance.Health <= 0)
         {
             GameManager.Instance.playerWon = false;
             GameManager.Instance.EndGame();

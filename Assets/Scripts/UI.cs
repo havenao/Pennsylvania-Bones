@@ -13,13 +13,11 @@ public class UI : MonoBehaviour
     void Start()
     {
         MakeArrow();
-        DisplayHealth();
+        DisplayHealth(Player.Instance.Health);
     }
 
-    private void DisplayHealth()
-    {
-        int health = Player.Instance.health;        
-
+    private void DisplayHealth(int health)
+    {        
         for (int i = 0; i < HealthContainer.transform.childCount; i++)
         {
             Destroy(HealthContainer.GetChild(i).gameObject);
@@ -38,7 +36,7 @@ public class UI : MonoBehaviour
 
     private void MakeArrow()
     {
-        arrow = Instantiate(arrow, new Vector3(4.5f, 4.5f), Quaternion.identity);
+        arrow = Instantiate(arrow, new Vector3(4.5f, 4.0f), Quaternion.identity);
         arrow.transform.parent = TowerImage;
     }
 
@@ -54,7 +52,7 @@ public class UI : MonoBehaviour
     {
         Player.Instance.OnHealthChanged += DisplayHealth;
         Player.Instance.OnArtifactGained += UpdateArtifactCount;
-        LevelManager.Instance.OnLevelChanged += MoveArrow;
+        LevelManager.Instance.OnLevelChanged += MoveArrow;        
     }
 
     private void OnDisable()

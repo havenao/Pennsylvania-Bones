@@ -2,18 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireAxe : GridObject
+public class FireAxe : Item
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Use()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y + .25f, transform.position.z);
+        if (LevelManager.Instance.Floor > 1)
+        {
+            LevelManager.Instance.NewLevel();
+        }
     }
-
-    protected override void PlayerPickup()
-    {        
-        ResetGridSpace();
-        // Todo: Add FireAxe To Inventory              
-    }
-
 }
