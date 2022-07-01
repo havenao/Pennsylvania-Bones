@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class Artifact : GridObject
 {
-
+    protected override void PlayerPickup()
+    {
+        Player.Instance.GetArtifact();
+        ResetGridSpace();
+    }
 }

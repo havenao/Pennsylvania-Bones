@@ -50,7 +50,7 @@ Material:
     - _BumpOutline: 0
     - _ColorMask: 15
     - _Diffuse: 0.5
-    - _FaceDilate: 0
+    - _FaceDilate: -0.04
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
     - _GlowInner: 0.05
@@ -68,8 +68,8 @@ Material:
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.8333333
-    - _ScaleRatioB: 0.6770833
-    - _ScaleRatioC: 0.6770833
+    - _ScaleRatioB: 0.7104166
+    - _ScaleRatioC: 0.7104166
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -121,6 +121,7 @@ Texture2D:
   m_MipCount: 1
   m_IsReadable: 1
   m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
   m_StreamingMipmaps: 0
   m_StreamingMipmapsPriority: 0
   m_AlphaIsTransparency: 0
@@ -156,13 +157,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hashCode: -677128276
   material: {fileID: -8967297531228758185}
-  materialHashCode: -320690521
+  materialHashCode: -1573799668
   m_Version: 1.1.0
   m_SourceFontFileGUID: 7b49a6c658d834f9a8953f5e4a4fb897
   m_SourceFontFile_EditorRef: {fileID: 0}
   m_SourceFontFile: {fileID: 0}
   m_AtlasPopulationMode: 0
   m_FaceInfo:
+    m_FaceIndex: 0
     m_FamilyName: SF Fedora Titles
     m_StyleName: Regular
     m_PointSize: 79
@@ -1933,6 +1935,8 @@ MonoBehaviour:
   m_AtlasTextures:
   - {fileID: -1397203091494665572}
   m_AtlasTextureIndex: 0
+  m_IsMultiAtlasTexturesEnabled: 0
+  m_ClearDynamicDataOnBuild: 0
   m_UsedGlyphRects:
   - m_X: 0
     m_Y: 0

@@ -18,9 +18,7 @@ public class UI : MonoBehaviour
 
     private void DisplayHealth()
     {
-        float heartX = 4.3f;
-        int health = Player.Instance.health;
-        
+        int health = Player.Instance.health;        
 
         for (int i = 0; i < HealthContainer.transform.childCount; i++)
         {
@@ -28,8 +26,8 @@ public class UI : MonoBehaviour
         }
         for (int i = 0; i < health; i++)
         {
-            GameObject uiHeart = Instantiate(heart, new Vector3(heartX + i, -2.5f), Quaternion.identity);
-            uiHeart.transform.parent = HealthContainer;
+            GameObject uiHeart = Instantiate(heart, HealthContainer);
+            uiHeart.transform.localPosition = new Vector3(i,  0, 0);            
         }
     }
 
@@ -40,7 +38,7 @@ public class UI : MonoBehaviour
 
     private void MakeArrow()
     {
-        arrow = Instantiate(arrow, new Vector3(4.5f, 4.0f), Quaternion.identity);
+        arrow = Instantiate(arrow, new Vector3(4.5f, 4.5f), Quaternion.identity);
         arrow.transform.parent = TowerImage;
     }
 

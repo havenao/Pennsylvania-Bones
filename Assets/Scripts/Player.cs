@@ -7,6 +7,12 @@ using TMPro;
 public class Player : MonoBehaviour
 {
     public static Player Instance;
+    private PlayerController _controller;
+    public PlayerController Controller => _controller;
+
+    private Animator _anim;
+    public Animator Anim => _anim;
+
     public int health = 3;
 
     private int artifacts = 0;
@@ -25,6 +31,9 @@ public class Player : MonoBehaviour
         {
             Instance = this;
         }
+
+        _controller = GetComponent<PlayerController>();
+        _anim = GetComponentInChildren<Animator>();
     }
     public void TakeDamage()
     {

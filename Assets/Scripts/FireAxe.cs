@@ -9,4 +9,11 @@ public class FireAxe : GridObject
     {
         transform.position = new Vector3(transform.position.x, transform.position.y + .25f, transform.position.z);
     }
+
+    protected override void PlayerPickup()
+    {        
+        ResetGridSpace();
+        // Todo: Add FireAxe To Inventory              
+    }
+
 }

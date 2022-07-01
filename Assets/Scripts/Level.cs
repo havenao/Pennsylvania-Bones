@@ -17,19 +17,19 @@ public class Level : MonoBehaviour
 
     private GridManager grid;
     public GridManager Grid => grid;
-    
 
+    int currentFloor;
     // Start is called before the first frame update
     void Start()
     {
-        int floor = LevelManager.Instance.Floor;
+        currentFloor = LevelManager.Instance.Floor;
         grid = GetComponent<GridManager>();
 
         grid.MakeGrid();
 
         Spawn(heart);
 
-        if (floor > 1)
+        if (currentFloor > 1)
         {
             Spawn(stairs);
         }
@@ -38,7 +38,7 @@ public class Level : MonoBehaviour
             LevelManager.Instance.GroundLevel();
         }
 
-        for (int i = 0; i < 11 - floor; i++)
+        for (int i = 0; i < 11 - currentFloor; i++)
         {
             Spawn(artifact);
         }
@@ -49,7 +49,7 @@ public class Level : MonoBehaviour
 
     public void SpawnFlame()
     {
-        for (int i = 11; i > LevelManager.Instance.Floor; i--)
+        for (int i = 11; i > currentFloor; i--)
         {
             Spawn(flame);
         }

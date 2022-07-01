@@ -9,8 +9,10 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
     public Level levelPrefab;
     public GameObject groundLevel;
+    [SerializeField] Transform tilemapParent; // (Grid)
 
-    public int Floor = 10;
+    private int _floor = 10;
+    public int Floor => _floor;
     private Level _currentLevel;
     public Level CurrentLevel => _currentLevel;
 
@@ -34,11 +36,12 @@ public class LevelManager : MonoBehaviour
 
     public Action OnLevelChanged;
 
-    public void NewLevel(bool firstLevel)
+    public void NewLevel(bool isFirstLevel = false)
     {
-        if (!firstLevel)
+        if (!isFirstLevel)
         {
-            Floor -= 1;
+            _floor -= 1;
+            Destroy(CurrentLevel.gameObject);
         }
         _currentLevel = Instantiate(levelPrefab);
         _currentLevel.transform.parent = this.transform;
@@ -47,8 +50,7 @@ public class LevelManager : MonoBehaviour
 
     public void GroundLevel()
     {
-        groundLevel = Instantiate(groundLevel);
-        groundLevel.transform.SetParent(GameObject.Find("Grid").transform);
+        groundLevel = Instantiate(groundLevel, tilemapParent);
     }
 }
 

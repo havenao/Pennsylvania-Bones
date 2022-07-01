@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Heart : GridObject
 {
+    protected override void PlayerPickup()
+    {
+        if (Player.Instance.health < 5)
+        {
+            Player.Instance.HealDamage();
+            ResetGridSpace();
+        }
+    }
+
     void Start()
     {
         //Adjusts the sprite to be in the right place

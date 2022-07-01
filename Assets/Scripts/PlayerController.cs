@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,40 +43,6 @@ public class PlayerController : MonoBehaviour
     //Collision will reset grid space to available, destroy object. 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Flame"))
-        {
-            ResetGridSpace(collision);
-
-            anim.Play("Burn", -1, 0f);
-            Player.Instance.TakeDamage();
-        }
-
-        if (collision.gameObject.CompareTag("Stairs"))
-        {
-            Destroy(LevelManager.Instance.CurrentLevel.gameObject);
-            LevelManager.Instance.NewLevel(false);
-        }
-
-        if (collision.gameObject.CompareTag("FireAxe"))
-        {
-            ResetGridSpace(collision);
-        }
-
-        if (collision.gameObject.CompareTag("Artifact"))
-        {
-            Player.Instance.GetArtifact();
-            ResetGridSpace(collision);            
-        }
-
-        if (collision.gameObject.CompareTag("Heart"))
-        {
-            if(Player.Instance.health < 5)
-            {
-                Player.Instance.HealDamage();
-                ResetGridSpace(collision);
-            }
-        }
-
         if (collision.gameObject.CompareTag("Exit"))
         {
             atExit = true;
@@ -123,13 +90,5 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("moving", true);
         }
-    }
-
-    private void ResetGridSpace(Collision2D collision)
-    {
-        GridObject objectToRemove = collision.gameObject.GetComponent<GridObject>();
-        LevelManager.Instance.CurrentLevel.Grid.RemoveObject(objectToRemove);
-
-        Destroy(collision.gameObject);
     }
 }

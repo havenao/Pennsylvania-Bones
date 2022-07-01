@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Stairs : GridObject
 {
+    protected override void PlayerPickup()
+    {        
+        LevelManager.Instance.NewLevel();
+    }
 
     // Start is called before the first frame update
     void Start()
