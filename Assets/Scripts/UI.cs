@@ -36,7 +36,7 @@ public class UI : MonoBehaviour
 
     private void MakeArrow()
     {
-        arrow = Instantiate(arrow, new Vector3(4.5f, 4.0f), Quaternion.identity);
+        arrow = Instantiate(arrow, new Vector3(4.5f, 4.25f), Quaternion.identity);
         arrow.transform.parent = TowerImage;
     }
 

@@ -7,10 +7,15 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     List<Item> _items;
     int _selectIndex;
+    [SerializeField] SpriteRenderer selector;
+
+    private void Start()
+    {
+        selector.enabled = false;
+    }
 
     private void AddItem(Item item)
     {
-
         item.transform.SetParent(this.transform);
         item.transform.localPosition = new Vector3(_items.Count,0,0);
         _items.Add(item);
@@ -18,6 +23,7 @@ public class Inventory : MonoBehaviour
         if(_items.Count == 1)
         {
             Reset();
+            selector.enabled = true;
         }
     }
 
@@ -33,6 +39,10 @@ public class Inventory : MonoBehaviour
         if(_items.Count > 0)
         {
             Reset();
+        }
+        else
+        {
+            selector.enabled = false;
         }
     }
 
@@ -55,14 +65,14 @@ public class Inventory : MonoBehaviour
     private void Select(int index)
     {
         _items[_selectIndex].transform.localScale = new Vector3(1, 1, 1);
-
         _selectIndex = index;
         _items[_selectIndex].transform.localScale = new Vector3(1.2f, 1.2f, 1);
+        selector.transform.position = _items[_selectIndex].transform.position;
     }
 
     private void Reset()
     {
-        _selectIndex = 0;
+        _selectIndex = 0;       
 
         for (int i = 0; i < _items.Count; i++)
         {
@@ -71,6 +81,7 @@ public class Inventory : MonoBehaviour
 
         Select(0);
     }
+  
     private void OnEnable()
     {
         Item.OnGetItem += AddItem;

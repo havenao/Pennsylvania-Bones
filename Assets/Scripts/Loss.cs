@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Victory : MonoBehaviour
+public class Loss : MonoBehaviour
 {
-    public TextMeshProUGUI winText;
+    public TextMeshProUGUI loseText;
     private void Awake()
     {
-        winScreen();
+        loseScreen();
     }
-    public void winScreen()
+    public void loseScreen()
     {
         string artifactCount = GameObject.Find("SceneState").GetComponent<SceneState>().artifacts.ToString();
-        winText.SetText($"well done mr. bones, you rescued {artifactCount} artifacts!");
+        loseText.SetText($"Aww shucks! Burned to a crisp with {artifactCount} artifacts!");
     }
 }
